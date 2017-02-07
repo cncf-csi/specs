@@ -1,6 +1,6 @@
 # Specifications for Container Storage Interfaces
 
-The purpose of this project is to define the various interfaces between cloud native schedulers and persistent data services.
+The purpose of this project is to define the various (vendor agnostic) interfaces between cloud native schedulers and persistent data services.
 
 There are 4 specific interfaces this project defines that schedulers and data service providers need to implement:
 
