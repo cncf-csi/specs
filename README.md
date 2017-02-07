@@ -15,3 +15,9 @@ The allocation, use (read and write) and destruction (what used to be known as C
 
 ## Lifecycle Operations on Data Services
 Data state and its lifecycle, such as retention levels, version levels, access controls should be separated from the actual application that uses them.  It should also be controlled by the scheduling software and it is the goal of this API to define how that is goverened.
+
+## Licensing
+`CNCF-CSI` is licensed under the Apache License, Version 2.0. See LICENSE for the full license text.
+
+## Contributing
+Want to collaborate and add? Here are instructions to [get started contributing code](contributing.md)
