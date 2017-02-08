@@ -24,6 +24,12 @@ type Device struct {
 	Metadata map[string]string
 }
 
+// Geography physical location of the node.
+type Geography struct {
+	Zone string
+	Rack int
+}
+
 // Node contains details regarding a specific host.  This information
 // will be provided to the service being deployed.  This information is
 // provided as a file on the host in yaml format.
@@ -34,6 +40,9 @@ type Node struct {
 
 	// IPs is teh list of IPs for this node.
 	IPs []string
+
+	// Geography is the physical location of the node.
+	Geography Geogrpahy
 
 	// Devices is the list of devices.
 	Devices []Device
