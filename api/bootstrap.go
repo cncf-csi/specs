@@ -28,7 +28,14 @@ type Device struct {
 // will be provided to the service being deployed.  This information is
 // provided as a file on the host in yaml format.
 type Node struct {
-	Ips     []string
+
+	// ID is unique node identifier.
+	ID string
+
+	// IPs is teh list of IPs for this node.
+	IPs []string
+
+	// Devices is the list of devices.
 	Devices []Device
 
 	// Constraints are cgroup restriuctions on the service container.
@@ -38,24 +45,29 @@ type Node struct {
 	// data service is part of.
 	ClusterID string
 
+	// Metadata provides arbitrary name value pairs.
 	Metadata map[string]string
 }
 
 // Bootstrap contains information for the scheduler.  It instructs the scheduler
 // to deploy a given service on a set of nodes.
 type Bootstrap struct {
-	ApiVersion      string
+	// DataServiceName data service name.
 	DataServiceName string
 
-	// The Docker image to execute on the hosts.
+	// Image name to execute on the host.
 	Image string
-
-	// Set of nodes to deploy the service on.
-	Nodes []Node
 }
 
 // Deploy will launch a data service on a set of machines as per the
 // bootstrap information.
-func Deploy(b Bootstrap) error {
-	return nil
+type Installer interface {
+	// Deploy data service to set of nodes.
+	Deploy(b *Bootstrap, Nodes []Node)
+
+	// Upgrade data service on set of nodes.
+	Upgrade(b *Bootstrap, Nodes []Node)
+
+	// Destroy data service on set of nodes.
+	Destroy(b *Bootsrap, Nodes []Node)
 }
