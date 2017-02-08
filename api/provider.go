@@ -1,5 +1,9 @@
 package api
 
+import (
+	"net"
+)
+
 type Provider interface {
 	// GetServiceType advertises the services offered by this
 	// providor on a given node.
@@ -9,6 +13,14 @@ type Provider interface {
 	// on a given node.
 	GetStat() (ServiceStat, NetStat, error)
 
+	// LogStats provides an logging URL for the providor dump
+	// service stats to.  An interval of 0 stops the logging.
+	LogStats(url net.URL, interval time.Duration) error
+
 	// GetAlerts returns the alerts for this providor on a given node.
 	GetAlerts() ([]Alert, error)
+
+	// LogAlerts provides an alerting URL for the providor dump
+	// service alerts to.  An interval of 0 stops the logging.
+	LogAlerts(url net.URL, interval time.Duration) error
 }

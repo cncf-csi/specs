@@ -21,6 +21,6 @@ type NetStat struct {
 type Alert struct {
 	Type      AlertType
 	AlertData []byte
-	Stamp     Time
+	TimeStamp Time
 	Id        uint64
 }
