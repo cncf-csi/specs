@@ -5,12 +5,12 @@ package api
 // Ultimately, this will be the simplest and most concise definition that consolidates
 // the goodness from muliple volume management drivers.
 
-// Volume definition
-type Volume struct {
+// Service definition
+type Service struct {
 }
 
-// VolumeSpec are options when creating a new volume.
-type VolumeSpec struct {
+// ServiceSpec are options when creating a new data service.
+type ServiceSpec struct {
 	AvailabilityZone *string
 	IOPS             *int64
 	Size             *int64
