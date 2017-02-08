@@ -13,56 +13,56 @@ type Provider interface {
 	Type() (string, error)
 
 	// Enumerate all volume that satisfy contraints defined by opts.
-	Enumerate(opts map[string]string) ([]*Volume, error)
+	Enumerate(opts map[string]string) ([]*Service, error)
 
-	// VolumeInspect inspects a single volume.
-	VolumeInspect(
+	// ServiceInspect inspects a single volume.
+	ServiceInspect(
 		volumeID string,
 		opts map[string]string,
-	) (*Volume, error)
+	) (*Service, error)
 
-	// VolumeCreate creates a new volume.
-	VolumeCreate(
+	// ServiceCreate creates a new volume.
+	ServiceCreate(
 		name string,
-		opts *VolumeSpec,
-	) (*Volume, error)
+		opts *ServiceSpec,
+	) (*Service, error)
 
-	// VolumeCreateFromSnapshot creates a new volume from an existing snapshot.
-	VolumeCreateFromSnapshot(
+	// ServiceCreateFromSnapshot creates a new volume from an existing snapshot.
+	ServiceCreateFromSnapshot(
 		snapshotID, volumeName string,
-		opts *VolumeSpec,
-	) (*Volume, error)
+		opts *ServiceSpec,
+	) (*Service, error)
 
-	// VolumeCopy copies an existing volume.
-	VolumeCopy(
+	// ServiceCopy copies an existing volume.
+	ServiceCopy(
 		volumeSrc, volumeDest string,
 		opts map[string]string,
-	) (*Volume, error)
+	) (*Service, error)
 
-	// VolumeSnapshot snapshots a volume.
-	VolumeSnapshot(
+	// ServiceSnapshot snapshots a volume.
+	ServiceSnapshot(
 		volumeID, snapshotName string,
 		opts map[string]string,
-	) (*Volume, error)
+	) (*Service, error)
 
-	// VolumeRemove removes a volume.
-	VolumeRemove(
+	// ServiceRemove removes a volume.
+	ServiceRemove(
 		volumeID string,
 		opts map[string]string,
 	) error
 
-	// VolumeAttach attaches a volume and provides a token clients can use
+	// ServiceAttach attaches a volume and provides a token clients can use
 	// to validate that device has appeared locally.
-	VolumeAttach(
+	ServiceAttach(
 		volumeID string,
 		opts map[string]string,
-	) (*Volume, string, error)
+	) (*Service, string, error)
 
-	// VolumeDetach detaches a volume.
-	VolumeDetach(
+	// ServiceDetach detaches a volume.
+	ServiceDetach(
 		volumeID string,
 		opts map[string]string,
-	) (*Volume, error)
+	) (*Service, error)
 
 	// Mount mounts volume to specific path
 	Mount(
