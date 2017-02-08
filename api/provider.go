@@ -59,6 +59,16 @@ type Provider interface {
 	// Type returns the type of storage the driver provides.
 	Type() (string, error)
 
+	// SchedulerQuery returns a list of nodes (IPs) that are preferred nodes
+	// to run a container on, given a set of opts.
+	SchedulerQuery(
+		opts map[string]string,
+	) ([]string, error)
+
+	// ServiceType advertises the services offered by this provider on a
+	// given node.
+	ServiceType() (DataService, error)
+
 	// Enumerate all service that satisfy contraints defined by opts.
 	Enumerate(opts map[string]string) ([]*Service, error)
 
@@ -115,16 +125,6 @@ type Provider interface {
 		ID, mountpoint string,
 		opts map[string]string,
 	) error
-
-	// SchedulerQuery returns a list of nodes (IPs) that are preferred nodes
-	// to run a container on, given a set of opts.
-	SchedulerQuery(
-		opts map[string]string,
-	) ([]string, error)
-
-	// ServiceType advertises the services offered by this provider on a
-	// given node.
-	ServiceType() (DataService, error)
 
 	// Stat returns the service and network statistics for this provider
 	// on a given node.
