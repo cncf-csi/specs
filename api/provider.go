@@ -8,9 +8,9 @@ import (
 // Modified version from https://github.com/codedellemc/libstorage as an example.
 // This is a minimal definition.
 // Ultimately, this will be the simplest and most concise definition that consolidates
-// the goodness from muliple volume management drivers.
+// the goodness from muliple service management drivers.
 
-// Service definition
+// Service definition.
 type Service struct {
 }
 
@@ -24,8 +24,10 @@ type ServiceSpec struct {
 	Options          map[string]string
 }
 
+type Capability int
+
 const (
-	CapabilityEncryption = iota
+	CapabilityEncryption Capability = iota
 	CapabilityCompresssion
 	CapabilityDeduplication
 	CapabilityReplication
@@ -39,7 +41,7 @@ type DataService struct {
 	ServiceType  string
 	Size         uint64
 	Iops         uint64
-	Capabilities []int
+	Capabilities []Capability
 }
 
 // Provider implements a data service provider.  This interface implements the
@@ -49,67 +51,67 @@ type Provider interface {
 	// Type returns the type of storage the driver provides.
 	Type() (string, error)
 
-	// Enumerate all volume that satisfy contraints defined by opts.
+	// Enumerate all service that satisfy contraints defined by opts.
 	Enumerate(opts map[string]string) ([]*Service, error)
 
-	// ServiceInspect inspects a single volume.
+	// ServiceInspect inspects a single service.
 	ServiceInspect(
-		volumeID string,
+		ID string,
 		opts map[string]string,
 	) (*Service, error)
 
-	// ServiceCreate creates a new volume.
+	// ServiceCreate creates a new service.
 	ServiceCreate(
 		name string,
 		opts *ServiceSpec,
 	) (*Service, error)
 
-	// ServiceCreateFromSnapshot creates a new volume from an existing snapshot.
+	// ServiceCreateFromSnapshot creates a new service from an existing snapshot.
 	ServiceCreateFromSnapshot(
-		snapshotID, volumeName string,
+		snapshotID, serviceName string,
 		opts *ServiceSpec,
 	) (*Service, error)
 
-	// ServiceCopy copies an existing volume.
+	// ServiceCopy copies an existing service.
 	ServiceCopy(
-		volumeSrc, volumeDest string,
+		serviceSrc, volumeDest string,
 		opts map[string]string,
 	) (*Service, error)
 
-	// ServiceSnapshot snapshots a volume.
+	// ServiceSnapshot snapshots a service.
 	ServiceSnapshot(
-		volumeID, snapshotName string,
+		ID, snapshotName string,
 		opts map[string]string,
 	) (*Service, error)
 
-	// ServiceRemove removes a volume.
+	// ServiceRemove removes a service.
 	ServiceRemove(
-		volumeID string,
+		ID string,
 		opts map[string]string,
 	) error
 
-	// ServiceAttach attaches a volume and provides a token clients can use
+	// ServiceAttach attaches a service and provides a token clients can use
 	// to validate that device has appeared locally.
 	ServiceAttach(
-		volumeID string,
+		ID string,
 		opts map[string]string,
 	) (*Service, string, error)
 
-	// ServiceDetach detaches a volume.
+	// ServiceDetach detaches a service.
 	ServiceDetach(
-		volumeID string,
+		ID string,
 		opts map[string]string,
 	) (*Service, error)
 
-	// Mount mounts volume to specific path
+	// Mount mounts service to specific path
 	Mount(
-		volumeID, mountpoint string,
+		ID, mountpoint string,
 		opts map[string]string,
 	) error
 
-	// Unmount unmounts volume to specific path
+	// Unmount unmounts service to specific path
 	Unmount(
-		volumeID, mountpoint string,
+		ID, mountpoint string,
 		opts map[string]string,
 	) error
 
