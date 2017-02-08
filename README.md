@@ -34,7 +34,7 @@ This defines how a scheduler can ensure that the deployment of application conta
 ### 7. Availability
 This definies how a scheduler can describe the availability levels of a given data service, that ensures the availability is provided across rack failures, data center failures, public cloud zone and region failures. This is how a cloud native application can request different levels of availability for the requested data service and the underlying data services layer depending on its capability and available resources at its disposal can either allocate the resources or decline. 
 
-### 8. Statistcs
+### 8. Statistics
 This defines the set of standard performance counters, utilization counters and error counters for the scheduler to query about a given data service from the data services layer. This could help application users perform troubleshooting, capacity planning and general monitoring of application performance and insight
 
 ### 9. Billing and Chargeback
