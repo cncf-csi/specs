@@ -18,9 +18,15 @@ type NetStat struct {
 	BytesReceived uint64
 }
 
+const (
+	HiAlert = iota
+	MedAlert
+	LowAlert
+)
+
 type Alert struct {
-	Type      AlertType
+	AlertType int
 	AlertData []byte
-	TimeStamp Time
+	TimeStamp time.Time
 	Id        uint64
 }

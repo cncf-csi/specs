@@ -69,5 +69,5 @@ type Installer interface {
 	Upgrade(b *Bootstrap, Nodes []Node)
 
 	// Destroy data service on set of nodes.
-	Destroy(b *Bootsrap, Nodes []Node)
+	Destroy(b *Bootstrap, Nodes []Node)
 }
