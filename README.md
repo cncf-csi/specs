@@ -11,7 +11,7 @@ This spec covers two aspects of orchestrating the deployment of data services vi
 This section of the spec describes how data service providers are deployed by orchestration software.  For example, these providers can be packaged as Linux Containers and they would need to be depoyed on the physical infrastructure by the orchestration software.  This is specified in [api/bootstrap.go](api/bootstrap.go).
 
 ## Runtime communication between the scheduler and the data service
-Once the data service has been deployed, there are 4 specific interfaces that schedulers and data service providers need to implement. 
+Once the data service has been deployed, there are 4 specific interfaces that schedulers and data service providers need to implement.  This is specified in [api/provider.go](api/provider.go).
 
 ### 1. Discovery of Data Services
 Applications that rely on data services should be able to dynamically discover where the provisioned resources are available.  The data service API should also be able to influence where and when these services should be scheduled based on the underlying constraints.
