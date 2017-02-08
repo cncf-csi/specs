@@ -23,7 +23,7 @@ The allocation, use (read and write) and destruction (what used to be known as C
 Data state and its lifecycle, such as retention levels, version levels, access controls should be separated from the actual application that uses them.  It should also be controlled by the scheduling software and it is the goal of this API to define how that is goverened.
 
 ### 4. Security
-This defines a set of constraints around how a container can authenticate itself in order to operate on a storage service.  This would prevent a container launched by a user from accessing a volume they do not have access to. This also defines how the application container data is secured in-flight and at-rest.
+This defines a set of constraints around how a container can authenticate itself in order to operate on a storage service.  This would prevent a container launched by a user from accessing a volume they do not have access to.  
 
 
 
