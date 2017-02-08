@@ -2,7 +2,7 @@
 
 The purpose of this project is to define the various (vendor agnostic) interfaces between cloud native schedulers and persistent data services.
 
-There are 4 specific interfaces this project defines that schedulers and data service providers need to implement:
+There are 5 specific interfaces this project defines that schedulers and data service providers need to implement:
 
 ## Bootstrap Deployment of Data Service Resources
 This section of the API describes how data service providers are deployed by orchestration software.  For example, these providers can be packaged as Linux Containers and they would need to be depoyed on the physical infrastructure by the orchestration software.
@@ -15,6 +15,9 @@ The allocation, use (read and write) and destruction (what used to be known as C
 
 ## Lifecycle Operations on Data Services
 Data state and its lifecycle, such as retention levels, version levels, access controls should be separated from the actual application that uses them.  It should also be controlled by the scheduling software and it is the goal of this API to define how that is goverened.
+
+## Security
+This defines a set of constraints around how a container can authenticate itself in order to operate on a storage service.  This would prevent a container launched by a user from accessing a volume they do not have access to.
 
 ## Licensing
 `CNCF-CSI` is licensed under the Apache License, Version 2.0. See LICENSE for the full license text.
