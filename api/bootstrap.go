@@ -38,7 +38,7 @@ type Node struct {
 	// ID is unique node identifier.
 	ID string
 
-	// IPs is teh list of IPs for this node.
+	// IPs is the list of IPs for this node.
 	IPs []string
 
 	// Geography is the physical location of the node.

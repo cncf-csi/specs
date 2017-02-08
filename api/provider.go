@@ -6,11 +6,11 @@ import (
 )
 
 // Modified version from https://github.com/codedellemc/libstorage as an example.
-// This is a minimal definition.
-// Ultimately, this will be the simplest and most concise definition that consolidates
-// the goodness from muliple service management drivers.
+// This is a minimal definition.  Ultimately, this will be the simplest and
+// most concise definition that consolidates the goodness from muliple
+// service management drivers.
 
-// Service definition.
+// Service definition. (TBD)
 type Service struct {
 }
 
@@ -115,6 +115,12 @@ type Provider interface {
 		ID, mountpoint string,
 		opts map[string]string,
 	) error
+
+	// SchedulerQuery returns a list of nodes (IPs) that are preferred nodes
+	// to run a container on, given a set of opts.
+	SchedulerQuery(
+		opts map[string]string,
+	) ([]string, error)
 
 	// ServiceType advertises the services offered by this provider on a
 	// given node.
