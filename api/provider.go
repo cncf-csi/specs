@@ -5,6 +5,43 @@ import (
 	"time"
 )
 
+// Modified version from https://github.com/codedellemc/libstorage as an example.
+// This is a minimal definition.
+// Ultimately, this will be the simplest and most concise definition that consolidates
+// the goodness from muliple volume management drivers.
+
+// Service definition
+type Service struct {
+}
+
+// ServiceSpec are options when creating a new data service.
+type ServiceSpec struct {
+	AvailabilityZone *string
+	IOPS             *int64
+	Size             *int64
+	Encrypted        *bool
+	EncryptionKey    *string
+	Options          map[string]string
+}
+
+const (
+	CapabilityEncryption = iota
+	CapabilityCompresssion
+	CapabilityDeduplication
+	CapabilityReplication
+	CapabilityDR
+	CapabilityMulitAZ
+	CapabilityConverged
+)
+
+type DataService struct {
+	// ServiceType could be a string such as object, block, file.
+	ServiceType  string
+	Size         uint64
+	Iops         uint64
+	Capabilities []int
+}
+
 // Provider implements a data service provider.  This interface implements the
 // union of the the data service's CRUD commands as well as it's
 // lifecycle operations.
