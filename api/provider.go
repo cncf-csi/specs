@@ -44,7 +44,15 @@ type DataService struct {
 	Capabilities []Capability
 }
 
-// Provider implements a data service provider.  This interface implements the
+type CreateOptions struct {
+	// SrcID Create service from source ID
+	SrcID string
+	// LateBinding allow creation of volume but defers resource allocation
+	// to when the service is instantiated.
+	LateBinding bool
+}
+
+// Provder implements a data service provider.  This interface implements the
 // union of the the data service's CRUD commands as well as it's
 // lifecycle operations.
 type Provider interface {
@@ -63,22 +71,15 @@ type Provider interface {
 	// Create creates a new service.
 	Create(
 		name string,
-		opts *ServiceSpec,
-	) (*Service, error)
-
-	// CreateFromSnapshot creates a new service from an existing snapshot.
-	CreateFromSnapshot(
-		snapshotID, serviceName string,
-		opts *ServiceSpec,
-	) (*Service, error)
-
-	// Copy copies an existing service.
-	Copy(
-		src, dst string,
+		spec *ServiceSpec,
+		createOpts *CreateOptions,
 		opts map[string]string,
 	) (*Service, error)
 
-	// ServiceSnapshot snapshots a service.
+	// Backup to provider.
+	Backup(ID string, provider Provider)
+
+	// Snapshot snapshots a service.
 	Snapshot(
 		ID, snapshotName string,
 		opts map[string]string,
@@ -103,34 +104,34 @@ type Provider interface {
 		opts map[string]string,
 	) (*Service, error)
 
-	// Mount mounts service to specific path
+	// Mount service to specific path.
 	Mount(
 		ID, mountpoint string,
 		opts map[string]string,
 	) error
 
-	// Unmount unmounts service to specific path
+	// Unmount service to specific path.
 	Unmount(
 		ID, mountpoint string,
 		opts map[string]string,
 	) error
 
-	// ServiceType advertises the services offered by this
-	// providor on a given node.
+	// ServiceType advertises the services offered by this provider on a
+	// given node.
 	ServiceType() (DataService, error)
 
-	// Stat returns the service and network statistics for this providor
+	// Stat returns the service and network statistics for this provider
 	// on a given node.
 	Stat() (ServiceStat, NetStat, error)
 
-	// LogStats provides an logging URL for the providor dump
+	// LogStats provides an logging URL for the provider dump
 	// service stats to.  An interval of 0 stops the logging.
 	LogStats(url url.URL, interval time.Duration) error
 
-	// Alerts returns the alerts for this providor on a given node.
+	// Alerts returns the alerts for this provider on a given node.
 	Alerts() ([]Alert, error)
 
-	// LogAlerts provides an alerting URL for the providor dump
+	// LogAlerts provides an alerting URL for the provider dump
 	// service alerts to.  An interval of 0 stops the logging.
 	LogAlerts(url url.URL, interval time.Duration) error
 }
