@@ -50,7 +50,7 @@ type Node struct {
 }
 
 // Bootstrap contains information for the scheduler.  It instructs the scheduler
-// to deploy a given service on a set of nodes.
+// to deploy a given service on a set of nodes from a container image.
 type Bootstrap struct {
 	// DataServiceName data service name.
 	DataServiceName string
@@ -59,8 +59,8 @@ type Bootstrap struct {
 	Image string
 }
 
-// Deploy will launch a data service on a set of machines as per the
-// bootstrap information.
+// Installer will manage the provisioning of data services on a set of
+// machines as per the bootstrap and node information.
 type Installer interface {
 	// Deploy data service to set of nodes.
 	Deploy(b *Bootstrap, Nodes []Node)
