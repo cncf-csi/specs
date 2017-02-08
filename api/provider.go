@@ -59,17 +59,17 @@ type Provider interface {
 	// Type returns the type of storage the driver provides.
 	Type() (string, error)
 
+	// ServiceType advertises the type of service (block, object, file etc)
+	// offered by this provider on a given node.
+	ServiceType() (DataService, error)
+
 	// SchedulerQuery returns a list of nodes (IPs) that are preferred nodes
 	// to run a container on, given a set of opts.
 	SchedulerQuery(
 		opts map[string]string,
 	) ([]string, error)
 
-	// ServiceType advertises the services offered by this provider on a
-	// given node.
-	ServiceType() (DataService, error)
-
-	// Enumerate all service that satisfy contraints defined by opts.
+	// Enumerate all services that satisfy contraints defined by opts.
 	Enumerate(opts map[string]string) ([]*Service, error)
 
 	// Inspect inspects a single service.
