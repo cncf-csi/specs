@@ -54,51 +54,51 @@ type Provider interface {
 	// Enumerate all service that satisfy contraints defined by opts.
 	Enumerate(opts map[string]string) ([]*Service, error)
 
-	// ServiceInspect inspects a single service.
-	ServiceInspect(
+	// Inspect inspects a single service.
+	Inspect(
 		ID string,
 		opts map[string]string,
 	) (*Service, error)
 
-	// ServiceCreate creates a new service.
-	ServiceCreate(
+	// Create creates a new service.
+	Create(
 		name string,
 		opts *ServiceSpec,
 	) (*Service, error)
 
-	// ServiceCreateFromSnapshot creates a new service from an existing snapshot.
-	ServiceCreateFromSnapshot(
+	// CreateFromSnapshot creates a new service from an existing snapshot.
+	CreateFromSnapshot(
 		snapshotID, serviceName string,
 		opts *ServiceSpec,
 	) (*Service, error)
 
-	// ServiceCopy copies an existing service.
-	ServiceCopy(
-		serviceSrc, volumeDest string,
+	// Copy copies an existing service.
+	Copy(
+		src, dst string,
 		opts map[string]string,
 	) (*Service, error)
 
 	// ServiceSnapshot snapshots a service.
-	ServiceSnapshot(
+	Snapshot(
 		ID, snapshotName string,
 		opts map[string]string,
 	) (*Service, error)
 
-	// ServiceRemove removes a service.
-	ServiceRemove(
+	// Remove removes a service.
+	Remove(
 		ID string,
 		opts map[string]string,
 	) error
 
-	// ServiceAttach attaches a service and provides a token clients can use
+	// Attach attaches a service and provides a token clients can use
 	// to validate that device has appeared locally.
-	ServiceAttach(
+	Attach(
 		ID string,
 		opts map[string]string,
 	) (*Service, string, error)
 
-	// ServiceDetach detaches a service.
-	ServiceDetach(
+	// Detach detaches a service.
+	Detach(
 		ID string,
 		opts map[string]string,
 	) (*Service, error)
@@ -115,20 +115,20 @@ type Provider interface {
 		opts map[string]string,
 	) error
 
-	// GetServiceType advertises the services offered by this
+	// ServiceType advertises the services offered by this
 	// providor on a given node.
-	GetServiceType() (DataService, error)
+	ServiceType() (DataService, error)
 
-	// GetStat returns the service and network statistics for this providor
+	// Stat returns the service and network statistics for this providor
 	// on a given node.
-	GetStat() (ServiceStat, NetStat, error)
+	Stat() (ServiceStat, NetStat, error)
 
 	// LogStats provides an logging URL for the providor dump
 	// service stats to.  An interval of 0 stops the logging.
 	LogStats(url url.URL, interval time.Duration) error
 
-	// GetAlerts returns the alerts for this providor on a given node.
-	GetAlerts() ([]Alert, error)
+	// Alerts returns the alerts for this providor on a given node.
+	Alerts() ([]Alert, error)
 
 	// LogAlerts provides an alerting URL for the providor dump
 	// service alerts to.  An interval of 0 stops the logging.
