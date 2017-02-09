@@ -3,24 +3,23 @@
 The purpose of this project is to define the various (vendor agnostic) interfaces between cloud native schedulers and persistent data services.
 
 ### Issues addressed by this spec
-1. Deployment of the data service provider by the scheduler:  The data service provider, perhaps packaged as a container, should be deployed on the servers being managed by the scheduler.
 
-2. Inline storage service provisioning: Users should be able to allocate data service resources programattically via the scheduler interface.  This obsoletes the need to do static out of band volume provisioning.
+Deployment of the data service provider by the scheduler: The data service provider, perhaps packaged as a container should be deployed on the servers being managed by the scheduler.
 
-3. Data locality aware scheduling: The scheduler should be able to take into account, the locality of a container's data, before it schedules it on a host.
+Inline storage service provisioning: Users should be able to allocate the data service resources programatically via the scheduler interface. This obsoletes the need to do static out-of-band volume provisioning.
+Data locality aware scheduling: The scheduler should be able to take into account the locality of a container's data, before it schedules it on a host.
 
-4. Scheduler driven data life cycle management: The lifecycle of a container and it's storage are different.  The scheduler should be able to manage both, seperately as independant entities.
+Scheduler driven data life cycle management: The life cycle of a container and it's storage are different. The scheduler should be able to manage both, separately as independent entities.
 
-5. Propogation of the data service properties via the scheduler: When a storage resource is created, the properties of the resource should be transparently passed through by the scheduler.  This obsoletes the need for such information being provided out of band via other methods.
+Propagation of the data service properties via the scheduler: When a storage resource is created, the properties of the resource should be transparently passed through by the scheduler. This obsoletes the need for such information being provided out-of-band via other methods.
 
-6. Common protocol of communication via the data service, scheduler and container runtime engine:  The data service provider should be able to allocate resources and manage them using the same (or close to similar) protocol regardless of it being used by the scheduler agent or the container runtime engine, like Docker.
+Common protocol of communication via the data service, scheduler and container runtime engine: The data service provider should be able to allocate resources and manage them using the same (or close to similar) protocol regardless of it being used by the scheduler agent or the container runtime engine, like Docker.
 
-7. Application awareness facilitated to the data service layer: The data service layer should have broader context of the application that is being deployed.  An application will comprise of many containers and having a broader context enables the data service layer to optimize and implement the correct HA features.  As an example, consider the deployment of a Cassandra ring.  Knowing the various containers that are part of the ring will help the data service provider to appropriately place the data in the correct failure domains.
+Application awareness facilitated to the data service layer: The data service layer should have broader context of the application that is being deployed. An application will comprise of many containers and having a broader context enables the data service layer to optimize and implement the correct HA features. As an example, consider the deployment of a Cassandra ring. Knowing the various containers that are part of the ring will help the data service provider to appropriately place the data in the correct failure domains.
 
-8. Authentication of access to a data service facilitated via the scheduler:  Prohibit a data service provider from allowing a container to use a service (such as a volume) that it is not authorized to use.
+Authentication of access to a data service facilitated via the scheduler: Prohibit a data service provider from allowing a container to use a service (such as a volume) that it is not authorized to use.
 
-9. Monitoring - Alerts and Stats propogated via the scheduler:  A common framework to get alerts and stats via the scheduler is desired.  This prevents the need for external event correlation.
-
+Monitoring - Alerts and Stats propagated via the scheduler: A common framework to get alerts and stats via the scheduler is desired. This prevents the need for external event correlation.
 
 ### Organization of the spec
 This spec covers two aspects of orchestrating the deployment of data services via a scheduler:
